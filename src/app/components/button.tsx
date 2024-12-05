@@ -3,6 +3,8 @@
 import Link from "next/link";
 import {
   HomeIcon,
+  SearchIcon,
+  HeartIcon,
   ClipboardIcon,
   CheckCircleIcon,
   UserIcon,
@@ -10,34 +12,48 @@ import {
 
 export default function FooterNav() {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 border-t bg-background">
-      <div className="flex items-center justify-around p-2">
+    <nav className="fixed bottom-0 left-0 right-0 border-t bg-white">
+      <div className="flex w-full">
         <Link
           href="/"
-          className="flex flex-col items-center gap-1 p-2 text-sm text-muted-foreground hover:text-foreground"
+          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-gray-400"
         >
-          <HomeIcon className="h-5 w-5" />
+          <HomeIcon className="h-6 w-6 mb-1" />
           <span>ホーム</span>
         </Link>
         <Link
-          href="/work"
-          className="flex flex-col items-center gap-1 p-2 text-sm text-muted-foreground hover:text-foreground"
+          href="/search"
+          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-black"
         >
-          <ClipboardIcon className="h-5 w-5" />
-          <span>おしごと</span>
+          <SearchIcon className="h-6 w-6 mb-1" />
+          <span>探す</span>
+        </Link>
+        <Link
+          href="/favorites"
+          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-gray-400"
+        >
+          <HeartIcon className="h-6 w-6 mb-1" />
+          <span>お気に入り</span>
+        </Link>
+        <Link
+          href="/work"
+          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-gray-400"
+        >
+          <ClipboardIcon className="h-6 w-6 mb-1" />
+          <span>お仕事</span>
         </Link>
         <Link
           href="/tasks"
-          className="flex flex-col items-center gap-1 p-2 text-sm text-muted-foreground hover:text-foreground"
+          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-gray-400"
         >
-          <CheckCircleIcon className="h-5 w-5" />
+          <CheckCircleIcon className="h-6 w-6 mb-1" />
           <span>やること</span>
         </Link>
         <Link
           href="/profile"
-          className="flex flex-col items-center gap-1 p-2 text-sm text-muted-foreground hover:text-foreground"
+          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-gray-400"
         >
-          <UserIcon className="h-5 w-5" />
+          <UserIcon className="h-6 w-6 mb-1" />
           <span>マイページ</span>
         </Link>
       </div>
