@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from "react";
 
-// 動画リスト
 // 動画のパスを配列で管理
 const videos = [
     "/image/video1.mp4",
@@ -17,12 +16,12 @@ const VideoSwiper = () => {
     useEffect(() => {
         // IntersectionObserverの設定
         const observerOptions = {
-            root: null, // ビューポートを基準
-            rootMargin: "0px", // 余白なしで監視
-            threshold: 0.8, // 動画が80%以上表示された場合に処理を実行
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.8,
         };
 
-        // 動画の表示状態を監視して再生・停止を切り替えるコールバック関数
+        // 動画の表示状態を監視して再生・停止を切り替える関数
         const handleIntersect = (entries) => {
             entries.forEach((entry) => {
                 const video = entry.target; // 現在監視対象の動画
@@ -62,15 +61,15 @@ const VideoSwiper = () => {
                     >
                         <video
                             ref={(el) => (videoRefs.current[index] = el)} // 各動画のDOM参照を保持
-                            src={src} // 動画のソース
+                            src={src}
                             className="w-full h-[calc(100vh-80px)] object-cover rounded-lg"
                             style={{
-                                aspectRatio: "9/16", // スマートフォンの一般的なアスペクト比 (縦長)
-                                maxHeight: "calc(100vh - 80px)", // 上下に余白を確保
+                                aspectRatio: "9/16",
+                                maxHeight: "calc(100vh - 80px)",
                             }}
-                            muted // デフォルトでミュート再生
-                            loop // ループ再生
-                            playsInline // iOSでのインライン再生をサポート
+                            muted
+                            loop
+                            playsInline
                         />
                     </div>
                 ))}
