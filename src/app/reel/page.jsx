@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 // 動画とタイトルの配列
 const videos = [
-    { src: "/image/video1.mp4", title: "株式会社ポポマーケットではあああああああああああああああああああ" },
-    { src: "/image/video2.mp4", title: "株式会社セブンナインではあああああああああああああああああああ" },
+    { src: "/image/video2.mp4", title: "株式会社ポポマーケットではあああああああああああああああああああ" },
+    { src: "/image/video1.mp4", title: "株式会社セブンナインではあああああああああああああああああああ" },
     { src: "/image/video3.mp4", title: "株式会社アパではあああああああああああああああああああ" },
 ];
 
@@ -52,6 +52,13 @@ const VideoSwiper = () => {
         setIsModalOpen(true);
     };
 
+    const handlePlayVideo = (index) => {
+        const video = videoRefs.current[index];
+        if (video) {
+            video.play();
+        }
+    };
+
     return (
         <div
             ref={containerRef}
@@ -78,7 +85,6 @@ const VideoSwiper = () => {
                             style={{
                                 aspectRatio: "9/16",
                             }}
-                            muted
                             loop
                             playsInline
                         />
@@ -91,6 +97,12 @@ const VideoSwiper = () => {
                             }}
                         >
                             <p className="text-white text-sm flex-1">{video.title}</p>
+                            <button
+                                onClick={() => handlePlayVideo(index)}
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
+                            >
+                                再生
+                            </button>
                             <button
                                 onClick={() => handleOpenModal(`詳細情報: ${video.title}`)}
                                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
