@@ -12,7 +12,7 @@ const VideoSwiper = () => {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.95, // Increased threshold for more precise detection
+      threshold: 0.95,
     };
 
     const handleIntersect = (entries) => {
