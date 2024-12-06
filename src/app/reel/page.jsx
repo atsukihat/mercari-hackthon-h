@@ -1,49 +1,45 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-// 動画リスト
-// 動画のパスを配列で管理
+// 動画とタイトルの配列
 const videos = [
-    "/image/video1.mp4",
-    "/image/video2.mp4",
-    "/image/video3.mp4",
+    { src: "/image/video1.mp4", title: "株式会社ポポマーケットではあああああああああああああああああああ" },
+    { src: "/image/video2.mp4", title: "株式会社セブンナインではあああああああああああああああああああ" },
+    { src: "/image/video3.mp4", title: "株式会社アパではあああああああああああああああああああ" },
 ];
 
 const VideoSwiper = () => {
-    // useRefを使用して各動画のDOM参照を保持
     const videoRefs = useRef([]);
+    const containerRef = useRef(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState("");
 
     useEffect(() => {
-        // IntersectionObserverの設定
         const observerOptions = {
-            root: null, // ビューポートを基準
-            rootMargin: "0px", // 余白なしで監視
-            threshold: 0.8, // 動画が80%以上表示された場合に処理を実行
+            root: null,
+            rootMargin: "0px",
+            threshold: 0.95,
         };
 
-        // 動画の表示状態を監視して再生・停止を切り替えるコールバック関数
         const handleIntersect = (entries) => {
             entries.forEach((entry) => {
-                const video = entry.target; // 現在監視対象の動画
+                const video = entry.target;
                 if (entry.isIntersecting) {
-                    video.play(); // 表示されている動画を再生
+                    video.play();
                 } else {
-                    video.pause(); // 非表示の場合は一時停止
-                    video.currentTime = 0; // 再生位置をリセット
+                    video.pause();
+                    video.currentTime = 0;
                 }
             });
         };
 
-        // IntersectionObserverのインスタンスを生成
         const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
-        // 各動画にObserverを適用
         videoRefs.current.forEach((video) => {
             if (video) observer.observe(video);
         });
 
-        // コンポーネントがアンマウントされたときにObserverを解除
         return () => {
             videoRefs.current.forEach((video) => {
                 if (video) observer.unobserve(video);
@@ -51,30 +47,92 @@ const VideoSwiper = () => {
         };
     }, []);
 
+    const handleOpenModal = (content) => {
+        setModalContent(content);
+        setIsModalOpen(true);
+    };
+
     return (
-        <div className="h-screen overflow-y-scroll snap-y snap-mandatory bg-black">
-            {/* スマートフォンサイズを意識したコンテナ */}
-            <div className="max-w-[430px] mx-auto">
-                {videos.map((src, index) => (
+        <div
+            ref={containerRef}
+            className="h-screen overflow-y-scroll bg-black relative"
+            style={{
+                scrollSnapType: "y mandatory",
+                scrollBehavior: "smooth",
+            }}
+        >
+            {/* Video Swiper Section */}
+            <div className="max-w-[430px] mx-auto h-full relative">
+                {videos.map((video, index) => (
                     <div
                         key={index}
-                        className="h-screen snap-start flex items-center justify-center"
+                        className="h-screen flex flex-col items-center justify-center relative"
+                        style={{
+                            scrollSnapAlign: "start",
+                        }}
                     >
                         <video
-                            ref={(el) => (videoRefs.current[index] = el)} // 各動画のDOM参照を保持
-                            src={src} // 動画のソース
-                            className="w-full h-[calc(100vh-80px)] object-cover rounded-lg"
+                            ref={(el) => (videoRefs.current[index] = el)}
+                            src={video.src}
+                            className="w-full h-full object-cover"
                             style={{
-                                aspectRatio: "9/16", // スマートフォンの一般的なアスペクト比 (縦長)
-                                maxHeight: "calc(100vh - 80px)", // 上下に余白を確保
+                                aspectRatio: "9/16",
                             }}
-                            muted // デフォルトでミュート再生
-                            loop // ループ再生
-                            playsInline // iOSでのインライン再生をサポート
+                            muted
+                            loop
+                            playsInline
                         />
+                        {/* 説明テキストとボタン部分 */}
+                        <div
+                            className="absolute flex items-center justify-between w-full px-4"
+                            style={{
+                                bottom: "15%", // 動画のフッダーから少し上に配置微調整中やった
+                                maxWidth: "400px",
+                            }}
+                        >
+                            <p className="text-white text-sm flex-1">{video.title}</p>
+                            <button
+                                onClick={() => handleOpenModal(`詳細情報: ${video.title}`)}
+                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
+                            >
+                                続きを見る
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
+
+            {/* モーダルセクション */}
+            {isModalOpen && (
+                <div
+                    id="modal"
+                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-end transition-opacity z-20"
+                    onClick={() => setIsModalOpen(false)}
+                >
+                    <div
+                        id="modalContent"
+                        className="bg-white w-full max-w-md p-6 rounded-t-2xl shadow-lg transform transition-transform"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="flex justify-between items-center">
+                            <h2 className="text-lg font-bold">📝 詳細情報</h2>
+                            <button
+                                onClick={() => setIsModalOpen(false)}
+                                className="text-gray-500 hover:text-gray-700 text-2xl"
+                            >
+                                &times;
+                            </button>
+                        </div>
+                        <p className="mt-4 text-gray-600">{modalContent}</p>
+                        <button
+                            onClick={() => setIsModalOpen(false)}
+                            className="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                        >
+                            応募する
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
