@@ -2,11 +2,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+//a
 // 動画とタイトルの配列
 const videos = [
-    { src: "/image/video2.mp4", title: "株式会社ポポマーケットではあああああああああああああああああああ" },
-    { src: "/image/video1.mp4", title: "株式会社セブンナインではあああああああああああああああああああ" },
-    { src: "/image/video3.mp4", title: "株式会社アパではあああああああああああああああああああ" },
+    { src: "/image/video1.mp4", title: "株式会社ポポマーケットではああああああああああああああああああ" },
+    { src: "/image/video2.mp4", title: "株式会社セブンナインではあああああああああああああああああああ" },
+    { src: "/image/video3.mp4", title: "株式会社アパではあああああああああああああああああ" },
 ];
 
 const VideoSwiper = () => {
@@ -25,9 +26,19 @@ const VideoSwiper = () => {
         const handleIntersect = (entries) => {
             entries.forEach((entry) => {
                 const video = entry.target;
+
                 if (entry.isIntersecting) {
+                    // 現在の動画を再生
                     video.play();
+                    // 他の動画をミュート
+                    videoRefs.current.forEach((v) => {
+                        if (v !== video) {
+                            v.pause();
+                            v.currentTime = 0;
+                        }
+                    });
                 } else {
+                    // 表示外の動画を停止
                     video.pause();
                     video.currentTime = 0;
                 }
@@ -50,13 +61,6 @@ const VideoSwiper = () => {
     const handleOpenModal = (content) => {
         setModalContent(content);
         setIsModalOpen(true);
-    };
-
-    const handlePlayVideo = (index) => {
-        const video = videoRefs.current[index];
-        if (video) {
-            video.play();
-        }
     };
 
     return (
@@ -97,12 +101,6 @@ const VideoSwiper = () => {
                             }}
                         >
                             <p className="text-white text-sm flex-1">{video.title}</p>
-                            <button
-                                onClick={() => handlePlayVideo(index)}
-                                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
-                            >
-                                再生
-                            </button>
                             <button
                                 onClick={() => handleOpenModal(`詳細情報: ${video.title}`)}
                                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
