@@ -4,7 +4,7 @@ import { Card } from "./ui/card";
 
 export function ConfirmationModal() {
   return (
-    <Card className="mx-auto w-full max-w-sm p-6 rounded-xl">
+    <Card className="mx-auto w-full max-w-sm p-6 rounded-xl bg-white">
       <div className="text-center space-y-6">
         <h2 className="text-xl font-bold">おしごとが確定しました</h2>
 
@@ -48,7 +48,7 @@ export function ConfirmationModal() {
           雇用契約について
         </a>
 
-        <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">
+        <Button className="w-8 h-8 sm:w-12 sm:h-12 bg-blue-500 hover:bg-blue-600 text-white">
           OK
         </Button>
       </div>
