@@ -9,6 +9,7 @@ const videos = [
     { src: "/image/video3.mp4", title: "株式会社アパではあああああああああああああああああああ" },
 ];
 
+//めっも
 const VideoSwiper = () => {
     const videoRefs = useRef([]);
     const containerRef = useRef(null);
