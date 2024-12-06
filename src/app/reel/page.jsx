@@ -82,7 +82,7 @@ const VideoSwiper = () => {
   // 応募完了で finish dialog を表示
   const handleFinish = () => {
     setIsConfirmOpen(false); // モーダルを閉じる
-    setIsFinalOpen(true); // finish Dialog を開く
+    setIsFinishOpen(true); // finish Dialog を開く
   };
 
   return (
@@ -205,24 +205,10 @@ const VideoSwiper = () => {
       >
         <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
           <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
-            <DialogTitle className="font-bold">応募確認</DialogTitle>
-            <Description>
-              応募を完了しますか？この操作は取り消せません。
-            </Description>
-            <div className="flex gap-4">
-              <button
-                onClick={() => setIsFinishOpen(false)}
-                className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
-              >
-                キャンセル
-              </button>
-              <button
-                onClick={handleFinish}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              >
-                応募を完了する
-              </button>
-            </div>
+            <DialogTitle className="font-bold">
+              応募が完了しました。
+            </DialogTitle>
+            <div className="flex gap-4"></div>
           </DialogPanel>
         </div>
       </Dialog>
