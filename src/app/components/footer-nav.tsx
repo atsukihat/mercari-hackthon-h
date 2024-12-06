@@ -4,7 +4,6 @@ import Link from "next/link";
 import {
   HomeIcon,
   SearchIcon,
-  HeartIcon,
   ClipboardIcon,
   CheckCircleIcon,
   UserIcon,
@@ -27,13 +26,6 @@ export default function FooterNav() {
         >
           <SearchIcon className="h-6 w-6 mb-1" />
           <span>探す</span>
-        </Link>
-        <Link
-          href="/favorites"
-          className="flex flex-1 flex-col items-center justify-center py-2 text-xs text-gray-400"
-        >
-          <HeartIcon className="h-6 w-6 mb-1" />
-          <span>お気に入り</span>
         </Link>
         <Link
           href="/work"
