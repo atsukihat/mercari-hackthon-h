@@ -4,7 +4,7 @@ import { Card } from "./ui/card";
 
 export function ConfirmationModal() {
   return (
-    <Card className="mx-auto w-full max-w-sm p-6 rounded-xl">
+    <Card className="mx-auto w-full max-w-sm p-6 rounded-xl bg-white">
       <div className="text-center space-y-6">
         <h2 className="text-xl font-bold">おしごとが確定しました</h2>
 
