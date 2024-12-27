@@ -11,6 +11,7 @@ import {
 //a
 // 動画とタイトルの配列
 const videos = [
+<<<<<<< HEAD
   {
     src: "/image/video1.mp4",
     title: "飯田珈琲店の田中です。ドリップと",
@@ -25,6 +26,21 @@ const videos = [
     title: "株式会社高谷です。欠品の補充の",
   },
 ];
+=======
+    {
+      src: "/image/video1.mp4",
+      title: "飯田物件店の中です。今日",
+    },
+    {
+      src: "/image/video2.mp4",
+      title: "株式会社セブンナインであぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁ",
+    },
+    {
+      src: "/image/video3.mp4",
+      title: "株式会社アパではぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁ",
+    },
+  ];
+>>>>>>> origin/main
 
 const VideoSwiper = () => {
   const videoRefs = useRef([]);
