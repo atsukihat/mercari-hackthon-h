@@ -8,31 +8,33 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-//a
 // 動画とタイトルの配列
 const videos = [
-    {
-      src: "/image/video1.mp4",
-      title: "飯田物件店の中です。今日",
-    },
-    {
-      src: "/image/video2.mp4",
-      title: "株式会社セブンナインであぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁ",
-    },
-    {
-      src: "/image/video3.mp4",
-      title: "株式会社アパではぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁぁ",
-    },
-  ];
+  {
+    src: "/image/video1.mp4",
+    title: "株式会社ポポマーケットではあああああああああああああああああああ",
+  },
+  {
+    src: "/image/video2.mp4",
+    title: "株式会社セブンナインではあああああああああああああああああああ",
+  },
+  {
+    src: "/image/video3.mp4",
+    title: "株式会社アパではあああああああああああああああああああ",
+  },
+];
 
 const VideoSwiper = () => {
   const videoRefs = useRef([]);
   const containerRef = useRef(null);
+
+  // 状態管理
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [isFinishOpen, setIsFinishOpen] = useState(false);
 
+  // Intersection Observerで動画の再生を制御
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -43,19 +45,9 @@ const VideoSwiper = () => {
     const handleIntersect = (entries) => {
       entries.forEach((entry) => {
         const video = entry.target;
-
         if (entry.isIntersecting) {
-          // 現在の動画を再生
           video.play();
-          // 他の動画をミュート
-          videoRefs.current.forEach((v) => {
-            if (v !== video) {
-              v.pause();
-              v.currentTime = 0;
-            }
-          });
         } else {
-          // 表示外の動画を停止
           video.pause();
           video.currentTime = 0;
         }
@@ -75,6 +67,7 @@ const VideoSwiper = () => {
     };
   }, []);
 
+  // モーダルを開く
   const handleOpenModal = (content) => {
     setModalContent(content);
     setIsModalOpen(true);
@@ -118,6 +111,7 @@ const VideoSwiper = () => {
               style={{
                 aspectRatio: "9/16",
               }}
+              muted
               loop
               playsInline
             />
@@ -125,7 +119,7 @@ const VideoSwiper = () => {
             <div
               className="absolute flex items-center justify-between w-full px-4"
               style={{
-                bottom: "15%", // 動画のフッダーから少し上に配置微調整中やった
+                bottom: "15%", // 動画のフッダーから少し上に配置微調整
                 maxWidth: "400px",
               }}
             >
