@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from "react";
 const videos = [
     { src: "/image/video1.mp4", title: "株式会社ポポマーケットではああああああああああああああああああ" },
     { src: "/image/video2.mp4", title: "株式会社セブンナインではあああああああああああああああああああ" },
-    { src: "/image/video3.mp4", title: "株式会社アパではあああああああああああああああああ" },
+    { src: "/image/video3.mp4", title: "コンビニ" },
 ];
 
 const VideoSwiper = () => {
